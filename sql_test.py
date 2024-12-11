@@ -2,13 +2,41 @@ import sqlite3
 from Song import Song
 from Playlist import Playlist
 
+# Make it a class with conn and cursor
+
 def connect_to_dB():
     conn = sqlite3.connect("PlayList.db")
     return conn
 
 # TO DO NOW
-def add_song_to_playlist(playlist : Playlist, song : Song) -> None:
+def add_song_from_playlist(playlist : Playlist, conn, cursor) -> None:
+    
+    for song in playlist.songs:
+        
+        with conn:
+            cursor.execute(
+                """INSERT INTO playlists_songs VALUES (:song_id, :playlist_id)""",
+                {
+                    "song_id": song.ID,
+                    "playlist_id": playlist.ID
+                },
+            )
     return
+
+def insert_playlist(playlist : Playlist, conn, cursor) -> None:
+
+    with conn:
+        cursor.execute(
+            """INSERT INTO playlists VALUES (:ID, :title)""",
+            {
+                "ID": None,
+                "title": playlist.get_title
+            },
+        )
+    cursor.execute("SELECT max(ID) FROM playlists")
+    t = cursor.fetchone()
+    playlist.ID = t[0]
+
 
 def insert_song(song: Song, conn, cursor) -> None:
 
@@ -94,9 +122,9 @@ def create_tables(conn, cursor):
         cursor.execute(
             """
             CREATE TABLE playlists_songs (
-                song_id INTEGER,
                 playlist_id INTEGER,
-                PRIMARY KEY (song_id, playlist_id)
+                song_id INTEGER,
+                PRIMARY KEY (playlist_id, song_id)
                 FOREIGN KEY (song_id)
                     REFERENCES songs (id)
                         ON DELETE CASCADE

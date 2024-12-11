@@ -6,7 +6,6 @@ import sql_test  as sql
 def main() -> None:
 
     # conn = sqlite3.connect(":memory:")
-
     conn = sql.connect_to_dB()
 
     cursor = conn.cursor()
@@ -44,7 +43,10 @@ def main() -> None:
     sql.insert_song(s_2, conn, cursor)
     sql.print_songs(cursor)
 
-    
+    sql.insert_playlist(p_1, conn, cursor)
+
+    sql.add_song_from_playlist(p_1, conn, cursor)
+
 
     # print("\nprint(get_song_by_title(Africa))")
     # update_song_vote(s_1, 99, conn, cursor)
@@ -63,6 +65,9 @@ def main() -> None:
     # cursor.execute("""INSERT INTO songs VALUES ('Beta', 'Depeche Mode', 0)""")
     # cursor.execute("""INSERT INTO songs VALUES ('CCC', 'Male', 0)""")
 
+    print("\n\n\n\n")
+
 
 if __name__ == "__main__":
     main()
+
