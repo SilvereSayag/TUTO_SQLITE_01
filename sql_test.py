@@ -8,7 +8,6 @@ def connect_to_dB():
     conn = sqlite3.connect("PlayList.db")
     return conn
 
-# TO DO NOW
 def add_song_from_playlist(playlist : Playlist, conn, cursor) -> None:
     
     for song in playlist.songs:

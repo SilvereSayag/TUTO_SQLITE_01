@@ -1,14 +1,16 @@
-# import sqlbite3
+import sqlite3
 from Song import Song
 from Playlist import Playlist
-from DataBase import DataBase
-# import db_test  as db
+import sql_test  as sql
 
 def main() -> None:
 
-    db = DataBase()
+    # conn = sqlite3.connect(":memory:")
+    conn = sql.connect_to_dB()
 
-    db.create_tables()
+    cursor = conn.cursor()
+
+    sql.create_tables(conn, cursor)
 
     s_1 = Song("Africa", "Toto")
     s_2 = Song("Bob Morane", "Indochine")
@@ -37,13 +39,14 @@ def main() -> None:
     print(f"songs : {p_1.get_songs}")
 
     print("\ninsert_song(s_1)")
-    db.insert_song(s_1)
-    db.insert_song(s_2)
-    db.print_songs()
+    sql.insert_song(s_1, conn, cursor)
+    sql.insert_song(s_2, conn, cursor)
+    sql.print_songs(cursor)
 
-    db.insert_playlist(p_1)
+    sql.insert_playlist(p_1, conn, cursor)
 
-    db.add_song_from_playlist(p_1)
+    sql.add_song_from_playlist(p_1, conn, cursor)
+
 
     # print("\nprint(get_song_by_title(Africa))")
     # update_song_vote(s_1, 99, conn, cursor)
