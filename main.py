@@ -10,40 +10,42 @@ def main() -> None:
 
     db.create_tables()
 
-    s_1 = Song("Africa", "Toto")
-    s_2 = Song("Bob Morane", "Indochine")
+    db.dummy_data()
 
-    p_1 = Playlist("ma premiere playlist")
+    # s_1 = Song("Africa", "Toto")
+    # s_2 = Song("Bob Morane", "Indochine")
 
-    print("\n")
+    # p_1 = Playlist("ma premiere playlist")
 
-    print(f"S1 : {s_1}")
-    print(f"S2 : {s_2}")
+    # print("\n")
 
-    s_1.votes = 9
+    # print(f"S1 : {s_1}")
+    # print(f"S2 : {s_2}")
 
-    print(f"S1 : {s_1}")
+    # s_1.votes = 9
 
-    print("\n")
+    # print(f"S1 : {s_1}")
 
-    print(f"playlist : {p_1}")
-    print(f"songs : {p_1.get_songs}")
+    # print("\n")
 
-    p_1.add_song(s_1)
-    p_1.add_song(s_2)
+    # print(f"playlist : {p_1}")
+    # print(f"songs : {p_1.get_songs}")
 
-    print("\n")
-    print(f"playlist : {p_1}")
-    print(f"songs : {p_1.get_songs}")
+    # p_1.add_song(s_1)
+    # p_1.add_song(s_2)
 
-    print("\ninsert_song(s_1)")
-    db.insert_song(s_1)
-    db.insert_song(s_2)
-    db.print_songs()
+    # print("\n")
+    # print(f"playlist : {p_1}")
+    # print(f"songs : {p_1.get_songs}")
 
-    db.insert_playlist(p_1)
+    # print("\ninsert_song(s_1)")
+    # db.insert_song(s_1)
+    # db.insert_song(s_2)
+    # db.print_songs()
 
-    db.add_song_from_playlist(p_1)
+    # db.insert_playlist(p_1)
+
+    # db.add_song_from_playlist(p_1)
 
     # print("\nprint(get_song_by_title(Africa))")
     # update_song_vote(s_1, 99, conn, cursor)

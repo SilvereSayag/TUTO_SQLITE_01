@@ -18,7 +18,7 @@ class DataBase:
         self.cursor = self.conn.cursor()
         return
 
-    def add_song_from_playlist(self, playlist: Playlist) -> None:
+    def add_song_to_playlist(self, playlist: Playlist) -> None:
 
         for song in playlist.songs:
             with self.conn:
@@ -133,3 +133,24 @@ class DataBase:
                 );
             """
             )
+
+    def dummy_data(self):
+        with self.conn:
+            self.cursor.execute("""INSERT INTO songs VALUES (1, 'Song1', 'Group1', 0)""")
+            self.cursor.execute("""INSERT INTO songs VALUES (2, 'Song2', 'Group1', 0)""")
+            self.cursor.execute("""INSERT INTO songs VALUES (3, 'Song3', 'Group3', 0)""")
+
+            self.cursor.execute("""INSERT INTO playlists VALUES (1, "Playlist1")""")
+
+            self.cursor.execute("""
+                                   INSERT INTO playlists_songs ("song_id", "playlist_id") 
+                                   VALUES (1, 1)
+                                """)
+            self.cursor.execute("""
+                                   INSERT INTO playlists_songs ("song_id", "playlist_id") 
+                                   VALUES (2, 1)
+                                """)
+            self.cursor.execute("""
+                                   INSERT INTO playlists_songs ("song_id", "playlist_id") 
+                                   VALUES (3, 1)
+                                """)
